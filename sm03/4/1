@@ -1,0 +1,21 @@
+GNU gdb (GDB) 13.2
+Copyright (C) 2023 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+[32mGEF[0m for linux ready, type `[4m[33mgef[24m[0m' to start, `[4m[35mgef config[24m[0m' to configure
+[1m[32m89[0m commands loaded and [1m[34m5[0m functions added for GDB [1m[33m13.2[0m in 0.00ms using Python engine [1m[31m3.11[0m
+Reading symbols from ./main...
+Attaching to program: /home/h0tmi/caos/sm03/4/main, process 2
+[?2004h[1;31mgef➤  [0m[?2004l[?2004h[1;31mgef➤  [0m[?2004l[?2004h[1;31mgef➤  [0mq
+[?2004l

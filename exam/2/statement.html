@@ -1,0 +1,19 @@
+<html><head><meta charset="utf-8"/></head>
+<body>
+<table border="1"><tr><td><b>Time limit:</b></td><td><tt>1 s</tt></td></tr>
+<tr><td><b>Real time limit:</b></td><td><tt>5 s</tt></td></tr>
+<tr><td><b>Memory limit:</b></td><td><tt>64M</tt></td></tr>
+</table>
+<h3>Problem exam-2: exam/gcc</h3>
+<p>Дана подпрограмма на языке ассемблера архитектуры x86:</p>
+<pre>func:
+movl    4(%esp), %edx
+movl    8(%esp), %eax
+leal    (%edx,%eax,4), %eax
+movl    (%eax), %edx
+addl    4(%edx), %eax
+addl    12(%esp), %eax
+ret
+</pre>
+<p>Запишите ее на языке Си.</p>
+<p> </p></body></html>

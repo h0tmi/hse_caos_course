@@ -1,0 +1,54 @@
+<html><head><meta charset="utf-8"/></head>
+<body>
+<table border="1"><tr><td><b>Time limit:</b></td><td><tt>1 s</tt></td></tr>
+<tr><td><b>Real time limit:</b></td><td><tt>5 s</tt></td></tr>
+<tr><td><b>Memory limit:</b></td><td><tt>64M</tt></td></tr>
+</table>
+<h3>Problem sm03-4: asm/data-structures/list-reverse</h3>
+<p>Напишите подпрограмму list_reverse, которая разворачивает односвязный список. На проверку следует сдать только файл с подпрограммой, без функции main.</p>
+<p>Элемент списка хранится в памяти в виде трёх подряд идущих 32-битных машинных слов: (1-2) произвольные 32-битные данные,
+            (3) адрес следующего элемента списка или 0. В программе определена глобальная переменная head, в которой
+            хранится адрес начала списка.
+            Подпрограмма должна развернуть список inplace и записать в head новый адрес его начала.</p>
+<p>Програма будет скомпилирована со следующей функцией main:</p>
+<pre>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdint.h&gt;
+
+struct elt {
+    uint32_t a;
+    uint32_t b;
+    struct elt *next;
+};
+
+struct elt *head;
+void list_reverse();
+
+int main() {
+    uint32_t x;
+    while (scanf("%u", 	&amp;x) == 1) {
+        struct elt* elt = calloc(sizeof(struct elt), 1);
+        elt-&gt;a = x;
+        elt-&gt;b = x/2;
+        elt-&gt;next = head;
+        head = elt;
+    }
+    list_reverse();
+    while (head) {
+        printf("%u %u\n", head-&gt;a, head-&gt;b);
+        head = head-&gt;next;
+    }
+}
+        </pre>
+<h3>Examples</h3><h4>Input</h4>
+<pre>1
+2
+3
+</pre>
+<h4>Output</h4>
+<pre>1 0
+2 1
+3 1
+</pre>
+<p> </p></body></html>

@@ -1,0 +1,125 @@
+Problem sm09-1: unix/files/read-file-fd-1
+
+Напишите функцию
+
+struct FileContent
+{
+    ssize_t size;
+    char *data;
+};
+struct FileContent read_file(int fd);
+
+Функция должна считать все содержимое файла по переданному файловому дескриптору. В случае ошибки чтения поле size должно быть равно -1, а поле data — NULL. В случае успешного чтения поле size должно содержать размер считанного файла, поле data — указатель на считанные данные. Область памяти data должна быть на 1 больше размера файла, и последний байт в области должен содержать байт 0. Таким образом, текстовый файл в памяти будет хранится как строка (null-terminated string).
+
+Ситуация нехватки памяти должна обрабатываться. В этом случае возвращаемое значение такое же, как при ошибке чтения.
+
+Для буферизации ввода используйте локальный буфер размера 4096 байт. Размер первой аллокации должен быть не больше 4096 байтов, для больших размеров не гарантируется корректная работа тестов.
+
+Используйте POSIX API работы с файлами.
+
+Размер потребляемой памяти не должен превышать max(4096, 2 * размер_файла).
+
+Помните, что read не обязан всегда считывать ровно то количество байт, которое было запрошено.
+
+Гарантируется, что в тестах размер файлов, которые должны быть успешно обработаны, не превышает 10M.
+
+При сдаче программы подключите заголовочный файл read_file.h.
+
+ 
+ChatGPT
+
+Вот пример решения на языке C:
+
+c
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
+struct FileContent
+{
+    ssize_t size;
+    char *data;
+};
+
+struct FileContent read_file(int fd)
+{
+    struct FileContent result;
+    result.size = -1;
+    result.data = NULL;
+
+    // Используем буфер размером 4096 байт
+    char buffer[4096];
+    ssize_t total_size = 0;
+    ssize_t read_bytes;
+
+    while ((read_bytes = read(fd, buffer, sizeof(buffer))) > 0)
+    {
+        char *new_data = realloc(result.data, total_size + read_bytes + 1);
+
+        if (!new_data)
+        {
+            // Ошибка выделения памяти
+            free(result.data);
+            return result;
+        }
+
+        result.data = new_data;
+
+        // Копируем данные в общий буфер
+        for (ssize_t i = 0; i < read_bytes; ++i)
+        {
+            result.data[total_size + i] = buffer[i];
+        }
+
+        total_size += read_bytes;
+    }
+
+    if (read_bytes < 0)
+    {
+        // Ошибка чтения
+        free(result.data);
+        return result;
+    }
+
+    // Успешное чтение
+    result.size = total_size;
+    result.data[total_size] = '\0'; // Добавляем завершающий нулевой байт
+
+    return result;
+}
+
+// Пример использования функции
+int main()
+{
+    int fd = open("example.txt", O_RDONLY);
+    if (fd == -1)
+    {
+        // Ошибка открытия файла
+        perror("Error opening file");
+        return EXIT_FAILURE;
+    }
+
+    struct FileContent content = read_file(fd);
+
+    if (content.size == -1)
+    {
+        // Ошибка чтения файла
+        perror("Error reading file");
+    }
+    else
+    {
+        // Успешное чтение файла, можно использовать content.data
+        // ...
+
+        // Важно освободить память после использования
+        free(content.data);
+    }
+
+    close(fd);
+
+    return EXIT_SUCCESS;
+}
+
+Обратите внимание, что в коде обрабатываются ошибки открытия файла, ошибки выделения памяти и ошибки чтения файла. Ваша программа должна корректно обрабатывать эти случаи и освобождать выделенную память в случае ошибки.
+

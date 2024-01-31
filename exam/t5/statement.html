@@ -1,0 +1,34 @@
+<html><head><meta charset="utf-8"/></head>
+<body><h3>Problem exam-t5: exam/tests/generated/test-05-bss</h3>
+<p>Дана единица трансляции на языке Си:</p>
+<pre><code>int var0 = 0;
+int var1 = 1;
+extern int evar;
+
+static int foo(int arg) {
+    int sum = arg + evar;
+    return sum;
+}
+
+int bar(int arg);
+
+void function(int arg) {
+    int fun0 = 0;
+    static int fun;
+    fun0 = foo(arg) + bar(arg);
+    fun = fun0 + arg;
+}
+</code></pre>
+<p>Выберите переменные, которые будут храниться в секции <code>.bss</code> соответствующего объектного файла:</p>
+<p><input type="checkbox" value="1"/>1) <code>var0</code></p>
+<p><input type="checkbox" value="2"/>2) <code>var1</code></p>
+<p><input type="checkbox" value="3"/>3) <code>evar</code></p>
+<p><input type="checkbox" value="4"/>4) <code>sum</code></p>
+<p><input type="checkbox" value="5"/>5) <code>fun0</code></p>
+<p><input type="checkbox" value="6"/>6) <code>fun</code></p>
+<p><div id="wrong_input" style="color: red; font-size: 20px"> </div></p>
+<p><script src="/tests_static.js"> </script></p>
+<h3>Notes</h3>
+<p>Внимание! Выпишите номера ответов через пробел в произвольном порядке.</p>
+<p>Если вы считаете что верны ответы 1, 3 и 5 то введите 1 3 5</p>
+<p> </p></body></html>

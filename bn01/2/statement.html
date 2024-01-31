@@ -1,0 +1,28 @@
+<html><head><meta charset="utf-8"/></head>
+<body>
+<table border="1"><tr><td><b>Time limit:</b></td><td><tt>1 s</tt></td></tr>
+<tr><td><b>Real time limit:</b></td><td><tt>5 s</tt></td></tr>
+<tr><td><b>Memory limit:</b></td><td><tt>64M</tt></td></tr>
+</table>
+<h3>Problem bn01-2: asm/hacks/buffer-overflow</h3>
+<p>Напишите функцию <code>void fill_buffer(char *input)</code> заполняющую буффер так чтобы вывод программы соответствовал примеру.</p>
+<p>Ваша программа будет скомпилирована с указанным main.c:</p>
+<pre>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void fill_buffer(char * buf);
+
+int main(int argc, char **argv) {
+    char input[64] = "";
+    char output[64] = "Buffer is incorrect";
+    fill_buffer(input);
+    printf("%s\n", output);
+}
+</pre>
+<p>Ваша программа не должна использовать вспомогательных функций кроме функций из библиотеки string.h</p>
+<p>Ваша программа не должна осуществлять ввод и вывод</p>
+<h3>Examples</h3><h4>Input</h4>
+<pre></pre>
+<h4>Output</h4>
+<pre>Прошу соблюдать правила ВШЭ</pre>
+<p> </p></body></html>
