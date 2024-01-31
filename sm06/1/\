@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    unsigned int family;
+    unsigned int model;
+
+    unsigned int ecx, edx;
+
+    asm (
+        "mov $1, %%eax\n"
+        "cpuid\n"
+        "shr 8, %%eax\n"
+        "and 0xF, %%eax\n"
+        "mov %%eax, %[fam]\n" 
+        "mov %%ebx, %[mod]\n" 
+        "mov %%ecx, %[ecx]\n" 
+        "mov %%edx, %[edx]\n" 
+        : [fam] "=rm" (family), [mod] "=rm" (model), [ecx] "=rm" (ecx), [edx] "=rm" (edx)
+        :
+        : "%eax", "%ebx", "%ecx", "%edx" 
+    );
+
+    printf("family=%d model=%d ecx=0x%x edx=0x%x\n", family, model, ecx, edx);
+    return 0;
+}
